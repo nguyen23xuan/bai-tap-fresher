@@ -1,21 +1,54 @@
 #include <stdio.h>
 
-int tinhTienTaxi(int soKm){
-    int soTien = 0;
-    if(soKm <= 1){
-        soTien = 5000;
-        return soTien;
-    }else if (soKm <= 30)
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void sapXepTangDan(int x[]){
+    for (int i = 0; i < 5-1; i++)
     {
-        soTien = soKm*4000;
-        return soTien;
-    }else
-    {
-        soTien = soKm*3000;
-        return soTien;
+        int viTriNhoNhat = i;
+        for (int j = i+1; j < 5; j++)
+        {
+            if(x[j] < x[viTriNhoNhat]){
+                viTriNhoNhat = j;
+            }
+        }
+        swap(&x[viTriNhoNhat], &x[i]);
     }
 }
 
+void sapXepGiamDan(int x[]){
+    for (int i = 0; i < 5-1; i++)
+    {
+        int viTriLonNhat = i;
+        for (int j = i+1; j < 5; j++)
+        {
+            if(x[j] > x[viTriLonNhat]){
+                viTriLonNhat = j;
+            }
+        }
+        swap(&x[viTriLonNhat], &x[i]);
+    }
+}
+
+void xuatMang(int x[]){
+    // printf("\nMang sau khi sap xep la: \n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d ", x[i]);
+    }
+    
+}
+
 int main(){
-    printf("So tien phai tra la: %d VND\n", tinhTienTaxi(31));
+    int mang[5] = {3, 2, 1, 4, 5};
+    sapXepTangDan(mang);
+    printf("\nSap xep mang tang dan: ");
+    xuatMang(mang);
+    sapXepGiamDan(mang);
+    printf("\nSap xep mang giam dan: ");
+    xuatMang(mang);
 }
